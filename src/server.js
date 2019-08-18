@@ -15,6 +15,8 @@ io.on('connection',socket =>{
     console.log(user,socket.id)
      connectedUser[user] = socket.id
     
+    console.log("socket_id",socket.id)
+    
 })
 
 app.use((req,res,next)=>{
