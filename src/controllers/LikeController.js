@@ -4,11 +4,14 @@ module.exports = {
 
    async store(req,res){
  
-       console.log(req.io,req.connectedUser)
+      
 
 
     const loggedDev =  await Dev.findById(req.headers.user);
     const targetDev = await Dev.findById(req.params.devId);
+      
+      console.log("loggedDev",loggedDev)
+      console.log("targetDev",targetDev)
 
     if(!targetDev){
         return res.status(404).json({error:'Dev not exists'})
@@ -18,6 +21,10 @@ module.exports = {
 
        const loggedSocket = req.connectedUser[req.headers.user];
        const targetSocket = req.connectedUser[req.params.devId]
+       
+             console.log("loggedSocket",loggedSocket)
+             console.log("targetSocket",targetSocket)
+      
 
        if(loggedSocket){
 
