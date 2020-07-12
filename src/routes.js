@@ -9,11 +9,11 @@ const ProductController = require("./controllers/ProductController");
 
 const routes = express.Router();
 
-routes.get("/devs",DevController.index)
-routes.post("/devs",DevController.store)
-routes.post("/devs/:devId/likes",LikeController.store)
-routes.post("/devs/:devId/likes",LikeController.store)
-routes.post("/devs/:devId/dislikes",DislikeController.store)
+routes.get("/user",DevController.index)
+routes.post("/user",DevController.store)
+routes.post("/user/:devId/likes",LikeController.store)
+routes.post("/user/:devId/likes",LikeController.store)
+routes.post("/user/:devId/dislikes",DislikeController.store)
 
 routes.post("/product",ProductController.store);
 routes.get("/product",ProductController.index);
