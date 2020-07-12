@@ -11,6 +11,10 @@ const UserSchema = new Schema({
     type:String,
     required:true
   },
+  urlFireBase:{
+    type:String,
+    required:true
+  },
 
   likes:[{
     type:Schema.Types.ObjectId,

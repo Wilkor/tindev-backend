@@ -21,23 +21,21 @@ module.exports = {
 
   async store(req,res){
 
+     const {user} = req.body
+     
+     const {displayName, uid, photoURL}  = user;
+     
 
-    console.log(req.body)
-     const {username} = req.body
-
-     const userExists = await Dev.findOne({user:username})
+     const userExists = await Dev.findOne({user:uid})
      if(userExists){
+       
          return res.json(userExists)
      }
-     const response = await axios.get(`https://api.github.com/users/${username}`);
 
-    console.log(response.data)
-     const {name,bio,avatar_url:avatar} = response.data;
      const  dev = await Dev.create({
-         name:name ||"Sem Nome",
-         user:username,
-         bio,
-         avatar:avatar
+         name:displayName,
+         user:uid,
+         urlFireBase:photoURL
      }).catch(err=>{
 
         console.log(err)
