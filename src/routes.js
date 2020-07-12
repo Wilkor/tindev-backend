@@ -16,7 +16,7 @@ routes.post("/devs/:devId/likes",LikeController.store)
 routes.post("/devs/:devId/dislikes",DislikeController.store)
 
 routes.post("/product",ProductController.store);
-
+routes.get("/product",ProductController.index);
 
 module.exports = routes;
 
