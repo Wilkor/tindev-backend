@@ -9,21 +9,21 @@ module.exports = {
 
 async store(req,res){
 
-   const {productName} = req.body
+   const {productName, user, urlFireBase, image, category } = req.body
 
    const userExists = await Product.findOne({productName:productName})
    if(userExists){
        return res.json(userExists)
    }
 
-   const  dev = await Product.create({
-     
+   const  product = await Product.create({
+    productName, user, urlFireBase, image, category 
 
    }).catch(err=>{
 
       console.log(err)
    })
-   return res.json(dev)
+   return res.json(product)
 
 }
 
