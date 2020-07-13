@@ -4,11 +4,11 @@ module.exports = {
 
    async store(req,res){
  
-    const loggedDev =  await Dev.findOne({user:req.headers.user});
+    const loggedDev =  await Produto.findOne({user:req.headers.user});
 
     console.log('loggedDev', loggedDev)
 
-    const targetDev =  await Produto.findOne({user:req.params.devId});
+    const targetDev =  await Dev.findOne({user:req.params.devId});
 
     console.log('targetDev', targetDev)
 
