@@ -1,10 +1,10 @@
 const Produto  = require("../models/product");
-
+const Dev  = require("../models/dev");
 module.exports = {
 
    async store(req,res){
  
-    const loggedDev =  await Produto.findOne({user:req.params.devId});
+    const loggedDev =  await Dev.findOne({user:req.headers.user});
 
     console.log('loggedDev', loggedDev)
 

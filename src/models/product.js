@@ -20,13 +20,12 @@ const ProductSchema = new Schema({
   },
   
   likes:[{
-    type:Schema.Types.ObjectId,
-    ref:'User'
+    type:String
+    
   }
   ],
   dislikes:[{
-    type:Schema.Types.ObjectId,
-    ref:'User'
+    type:String
   }]
 },
 {
