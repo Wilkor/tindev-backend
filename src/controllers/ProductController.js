@@ -1,5 +1,5 @@
 const Product  = require("../models/product");
-const Dev  = require("../models/dev");
+
 module.exports = {
 
 
@@ -19,17 +19,11 @@ module.exports = {
   async index(req,res){
 
     const user = req.params.id;
-    const loggedDev = await Product.findOne({user:user});
 
-    const userProduct = await Product.find({
-        $and:[
-            {_id:{$ne:user}},
-            {_id:{$nin:loggedDev.likes}},
-            {_id:{$nin:loggedDev.dislikes}}
-    ],
-    })
+    const products = await Product.find({user:{$nin:[user]}});
+ 
+    return res.json(products)
 
-    return res.json(userProduct)
 
   },
 

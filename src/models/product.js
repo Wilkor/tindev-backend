@@ -19,14 +19,6 @@ const ProductSchema = new Schema({
     required:true
   },
   
-  likes:[{
-    type:String
-    
-  }
-  ],
-  dislikes:[{
-    type:String
-  }]
 },
 {
     timestamps:true

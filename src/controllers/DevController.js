@@ -28,7 +28,7 @@ module.exports = {
 
      const userExists = await Dev.findOne({user:uid})
      if(userExists){
-       
+       console.log('oi')
          return res.json(userExists)
      }
 

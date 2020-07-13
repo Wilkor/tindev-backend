@@ -1,17 +1,11 @@
-const Produto  = require("../models/product");
 const Dev  = require("../models/dev");
+
 module.exports = {
 
    async store(req,res){
  
-    const loggedDev =  await Produto.findOne({user:req.headers.user});
-
-    console.log('loggedDev', loggedDev)
-
-    const targetDev =  await Dev.findOne({user:req.params.devId});
-
-    console.log('targetDev', targetDev)
-
+    const loggedDev =  await Dev.findById(req.headers.user);
+    const targetDev = await Dev.findById(req.params.devId);
 
     if(!targetDev){
         return res.status(404).json({error:'Dev not exists'})
