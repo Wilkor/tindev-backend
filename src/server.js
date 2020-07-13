@@ -10,13 +10,10 @@ const io = require("socket.io")(server)
 
 const connectedUser = {}
 
-io.on('connection',socket =>{
+io.on('connection',socket => {
+
     const {user} = socket.handshake.query;
-    console.log(user,socket.id)
      connectedUser[user] = socket.id
-    
-    console.log("socket_id",socket.id)
-    
 })
 
 app.use((req,res,next)=>{
