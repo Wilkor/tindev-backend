@@ -1,4 +1,6 @@
 const Dev  = require("../models/dev");
+const Product  = require("../models/product");
+
 
 module.exports = {
 
@@ -26,7 +28,18 @@ module.exports = {
          req.io.to(targetSocket).emit('match',loggedDev);
 
        }
-        console.log('DEU MATCH');
+       
+       const filter = { user: req.headers.user };
+       const filter2 = { user: req.params.devId};
+       const update = { hasLike: true };
+       
+        await Product.findOneAndUpdate(filter, update, {
+         new: true
+       });
+       await Product.findOneAndUpdate(filter2, update, {
+        new: true
+      });
+  
 
      }
      loggedDev.likes.push(targetDev._id)
