@@ -19,7 +19,7 @@ const ProductSchema = new Schema({
     required:true
   },
   hasLike:{
-    type:String,
+    type:Boolean,
     default: false
   },
 },
