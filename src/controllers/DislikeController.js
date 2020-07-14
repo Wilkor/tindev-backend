@@ -19,7 +19,7 @@ module.exports = {
       new: true
     });
 
-      loggedDev.dislikes.push(targetDev._id)
+     // loggedDev.dislikes.push(targetDev._id)
 
       await loggedDev.save();
 
