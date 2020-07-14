@@ -18,6 +18,13 @@ const ProductSchema = new Schema({
     type:String,
     required:true
   },
+  likes:[{
+    type:String
+  }
+  ],
+  dislikes:[{
+    type:String
+  }],
   hasLike:{
     type:Boolean,
     default: false

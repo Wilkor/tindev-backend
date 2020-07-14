@@ -4,8 +4,8 @@ module.exports = {
 
    async store(req,res){
 
-    const loggedDev =  await Dev.findById(req.headers.user);
-    const targetDev = await Dev.findById(req.params.devId);
+    const loggedDev =  await Dev.findOne(req.headers.user);
+    const targetDev = await Dev.findOnde(req.params.devId);
 
     if(!targetDev){
         return res.status(404).json({error:'Dev not exists'})
