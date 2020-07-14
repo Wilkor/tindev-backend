@@ -7,7 +7,7 @@ module.exports = {
     const loggedDev =  await Dev.findById(req.headers.user);
    //const targetDev = await Dev.findOnde(req.params.devId);
 
-    if(!targetDev){
+    if(!loggedDev){
         return res.status(404).json({error:'Dev not exists'})
     }
 
