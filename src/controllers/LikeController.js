@@ -1,5 +1,5 @@
 const Dev  = require("../models/dev");
-const Product  = require("../models/product");
+
 
 
 module.exports = {
@@ -30,16 +30,16 @@ module.exports = {
 
        }
        
-       const filter = { user: req.headers.user };
-       const filter2 = { user: req.params.devId};
-       const update = { hasLike: true };
+      //  const filter = { user: req.headers.user };
+      //  const filter2 = { user: req.params.devId};
+      //  const update = { hasLike: true };
        
-        await Product.findOneAndUpdate(filter, update, {
-         new: true
-       });
-       await Product.findOneAndUpdate(filter2, update, {
-        new: true
-      });
+      //   await Product.findOneAndUpdate(filter, update, {
+      //    new: true
+      //  });
+      //  await Product.findOneAndUpdate(filter2, update, {
+      //   new: true
+      // });
   
 
      }
