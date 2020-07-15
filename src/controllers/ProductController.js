@@ -8,7 +8,7 @@ module.exports = {
 
     const user = req.params.id;
 
-    const products = await Product.find({user:{$in:[user]}});
+    const products = await Product.find({user:{$nin:[user]}});
  
     console.log(products)
     return res.json(products)
