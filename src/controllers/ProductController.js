@@ -19,7 +19,7 @@ module.exports = {
   async index(req,res){
 
     const user = req.params.id;
-    const products = await Product.find({user:{$nin:[user]}, $and:[{hasLike:false}]}).sort({_id:-1});
+    const products = await Product.find({$and:[{hasLike:false}]}).sort({_id:-1});
  
     return res.json(products)
 
