@@ -16,6 +16,11 @@ io.on('connection',socket => {
      connectedUser[user] = socket.id
 })
 
+io.on('disconnect',socket => {
+
+  console.log('desconectado')
+})
+
 app.use((req,res,next)=>{
 
     req.io = io;

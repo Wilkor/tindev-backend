@@ -27,9 +27,18 @@ module.exports = {
      
 
      const userExists = await Dev.findOne({user:uid})
+
      if(userExists){
-       console.log('oi')
-         return res.json(userExists)
+
+      userExists.online = true;
+
+      console.log('user socket', req.connectedUser)
+     // userExists.idSocket = req.connectedUser
+
+      userExists.save();
+      
+      return res.json(userExists);
+
      }
 
      const  dev = await Dev.create({

@@ -24,7 +24,14 @@ const UserSchema = new Schema({
   dislikes:[{
     type:Schema.Types.ObjectId,
     ref:'User'
-  }]
+  }],
+  online:{
+    type: Boolean,
+    default: false
+  },
+  idSocket:{
+    type: String
+  }
 
 },
 {

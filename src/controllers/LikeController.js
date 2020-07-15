@@ -1,32 +1,38 @@
 const Dev  = require("../models/dev");
-
+const Product  = require("../models/product");
 
 
 module.exports = {
 
    async store(req,res){
- 
-    let loggedDev =  await Dev.findById(req.headers.user);
-    let targetDev = await Dev.findById(req.params.devId);
 
-    if(!targetDev){
-        return res.status(404).json({error:'Dev not exists'})
-    }
+    let likedProduct =   await Product.findById(req.params.devId);
+    
+   // const loggedUser = req.connectedUser[req.headers.user];
+    const targetSocket = req.connectedUser[likedProduct.user];
+    
+    let infoUser =   await Dev.findById(req.headers.user);
+    //let likedProduct =   await Product.findById(req.params.devId);
 
-     if(targetDev.likes.includes(loggedDev._id)){
+    // if(!targetDev){
+    //     return res.status(404).json({error:'Dev not exists'})
+    // }
 
-       const loggedSocket = req.connectedUser[req.headers.user];
-       const targetSocket = req.connectedUser[req.params.devId];
+    //  if(targetDev.likes.includes(loggedDev._id)){
 
-       if(loggedSocket){
+    //    const loggedSocket = req.connectedUser[req.headers.user];
+    //    const targetSocket = req.connectedUser[req.params.devId];
+
+    //    if(loggedSocket){
        
-         req.io.to(loggedSocket).emit('match',targetDev);
+    //      console.log('usuário logado', loggedSocket)
+    //      req.io.to(loggedSocket).emit('match',targetDev);
 
-       }
+    //    }
 
-       if(targetSocket){
-       
-         req.io.to(targetSocket).emit('match',loggedDev);
+       if(likedProduct.user){
+      
+         req.io.to(targetSocket).emit('match',infoUser);
 
        }
        
@@ -41,12 +47,14 @@ module.exports = {
       //   new: true
       // });
   
-
+      return res.json({ok:'ok'})
      }
-     loggedDev.likes.push(targetDev._id)
+    // loggedDev.likes.push(targetDev._id)
 
-    await loggedDev.save();
+  //  await loggedDev.save();
 
-   return res.json({loggedDev})
-   }
+  // return res.json({loggedDev})
+  // }
+
+  
 }
