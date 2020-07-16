@@ -49,14 +49,15 @@ io.on('connection',socket => {
     socket.on('disconnect', () => {
 
       const user = removeUser(socket.id);
-      const userExists =  Dev.findById(socket.handshake.query.user);
-
-      if(userExists){
-        userExists.online = fasle;
-        userExists.save();
-       }
-
+      
+      
       if(user) {
+        const userExists =  Dev.findById(socket.handshake.query.user);
+        
+        if(userExists){
+          userExists.online = fasle;
+          userExists.save();
+        }
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
         io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
       }
