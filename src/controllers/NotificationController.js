@@ -8,11 +8,11 @@ module.exports = {
 
     if(!notification) {
 
-       return res.json({notification});
+       return res.json([]);
+       
+   }
+   return res.json({notification});
 
-    }
-
-    return res.json([]);
 
    }
 }
