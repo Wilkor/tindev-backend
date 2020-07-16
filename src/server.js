@@ -49,7 +49,7 @@ io.on('connection',socket => {
     socket.on('disconnect', () => {
 
       const user = removeUser(socket.id);
-      const userExists = await Dev.findById(socket.handshake.query.user);
+      const userExists =  Dev.findById(socket.handshake.query.user);
 
       if(userExists){
         userExists.online = fasle;
