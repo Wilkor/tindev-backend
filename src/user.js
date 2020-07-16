@@ -19,11 +19,13 @@ const addUser = ({ id, name, room }) => {
 }
 
 const removeUser = async (id,userId) => {
+
+  console.log(userId)
   const index = users.findIndex((user) => user.id === id);
 
   if(index !== -1) return users.splice(index, 1)[0];
 
-  const userExists =  await Dev.findById(userId);
+  const userExists =  await Dev.findById(userId.user);
 
   if(userExists){
     userExists.online = false;
