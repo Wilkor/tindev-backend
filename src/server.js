@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require('cors');
-const Dev  = require("./models/dev");
+
 
 const app = express();
 const server = require('http').Server(app)
@@ -48,14 +48,7 @@ io.on('connection',socket => {
   
     socket.on('disconnect', async () => {
 
-      //const user = removeUser(socket.id);
-      const {user} = socket.handshake.query;
-      const userExists =  await Dev.findById(user);
-
-      if(userExists){
-        userExists.online = false;
-        userExists.save();
-       }
+      const user = removeUser(socket.id, socket.handshake.query ) 
 
       if(user) {
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
