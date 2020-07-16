@@ -49,10 +49,9 @@ io.on('connection',socket => {
   
     socket.on('disconnect', () => {
 
-
       const user = removeUser(socket.id);
 
-      console.log('estou saindo')
+      console.log('estou saindo', socket.handshake.query.user)
   
       if(user) {
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
