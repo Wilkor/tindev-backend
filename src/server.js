@@ -21,7 +21,7 @@ io.on('connection', async (socket) => {
      const userExists =  await Dev.findById(user);
 
      if(userExists){
-       userExists.online = false;
+       userExists.online = true;
        userExists.save();
       }
      
