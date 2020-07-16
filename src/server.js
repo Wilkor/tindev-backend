@@ -46,21 +46,17 @@ io.on('connection',socket => {
 
     });
   
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async () => {
 
       const user = removeUser(socket.id);
-      
-          Dev.findById(socket.handshake.query.user).then(res => {
+      const userExists =  Dev.findById(socket.handshake.query.user);
 
-          if(res) {
-            res.online = falsse;
-            res.save();
-          }
+      if(userExists){
+        userExists.online = false;
+        userExists.save();
+       }
 
-        });
-      
       if(user) {
-
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
         io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
       }
