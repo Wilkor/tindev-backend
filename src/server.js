@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require('cors');
-const Dev  = require("./models/dev");
+
 
 const app = express();
 const server = require('http').Server(app)
@@ -17,15 +17,11 @@ io.on('connection', async (socket) => {
 
     const {user} = socket.handshake.query;
      connectedUser[user] = socket.id
-
-    //  const userExists =  await Dev.findById(user);
-
-    //  if(userExists){
-    //    userExists.online = true;
-    //    userExists.save();
-    //   }
      
      socket.on('join', ({ name, room }, callback) => {
+
+      console.log(connectedUser)
+      console.log({ id: socket.id, name, room })
 
       const { error, user } = addUser({ id: socket.id, name, room });
 
@@ -47,9 +43,11 @@ io.on('connection', async (socket) => {
 
     });
   
-    socket.on('disconnect', async () => {
+    socket.on('disconnect', () => {
 
       const user = removeUser(socket.id) 
+
+      console.log('saindo')
 
       if(user) {
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });

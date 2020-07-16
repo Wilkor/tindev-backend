@@ -17,6 +17,9 @@ const NotificationSchema = new Schema({
   },
   userLogged:{
     type:String
+  },
+  productId:{
+    type:String
   }
 },
 {

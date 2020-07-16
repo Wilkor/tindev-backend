@@ -7,34 +7,38 @@ module.exports = {
    async store(req,res){
 
     let likedProduct =   await Product.findById(req.params.devId);
-    
-    const targetSocket = req.connectedUser[likedProduct.user];
-    
-    let infoUser =   await Dev.findById(req.headers.user);
 
+    const targetSocket = req.connectedUser[likedProduct.user];
+    let infoUser =   await Dev.findById(req.headers.user);
       userLogged  =  await Dev.findById(likedProduct.user);
 
-    
 
-        if(!userLogged.online === true ){
 
-          await Notification.create({
-            name: infoUser.name,
-            user: likedProduct.user,
-            urlFireBase: infoUser.urlFireBase,
-            userLogged: req.headers.user
-          })
+        if (likedProduct.likes.includes(req.headers.user)) {
           
-        }
-        
-        if(likedProduct.user){
-        
-          req.io.to(targetSocket).emit('like',infoUser);
+          if(!userLogged.online === true ){
   
+            await Notification.create({
+              name: infoUser.name,
+              user: likedProduct.user,
+              urlFireBase: infoUser.urlFireBase,
+              userLogged: req.headers.user,
+              produtctId: likedProduct.Id
+            });
+            likedProduct.likes.push(req.headers.user);
+            likedProduct.save();
+          } else {
+
+             return res.json({message:'Você já curtiu esse produto!'})
+          }
+        } else {
+          
+          req.io.to(targetSocket).emit('like',infoUser);
+          likedProduct.likes.push(req.headers.user);
+          likedProduct.save();
+         
+          return res.json({ok:'ok'})
         }
-
-
-        return res.json({ok:'ok'})
 
        
      }

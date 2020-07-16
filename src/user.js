@@ -24,13 +24,6 @@ const removeUser = async (id) => {
 
   if(index !== -1) return users.splice(index, 1)[0];
 
-  // const userExists =  await Dev.findById(userId.user);
-
-  // if(userExists){
-  //   userExists.online = false;
-  //   userExists.save();
-  //  }
-
 }
 
 const getUser = (id) => users.find((user) => user.id === id);
