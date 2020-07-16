@@ -50,7 +50,7 @@ io.on('connection',socket => {
 
       //const user = removeUser(socket.id);
       const {user} = socket.handshake.query;
-      const userExists =  await Dev.findOne({_id:user});
+      const userExists =  await Dev.findById(user);
 
       if(userExists){
         userExists.online = false;
