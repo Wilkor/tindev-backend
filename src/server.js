@@ -15,19 +15,14 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./user');
 
 io.on('connection',socket => {
 
-
     const {user} = socket.handshake.query;
      connectedUser[user] = socket.id
 
-
-     console.log('user socket', connectedUser)
+    console.log("voltei")
      socket.on('join', ({ name, room }, callback) => {
-
 
       const { error, user } = addUser({ id: socket.id, name, room });
 
-       console.log('user',user)
-  
       if(error) return callback(error);
       
       socket.join(user.room);
