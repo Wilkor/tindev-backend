@@ -25,7 +25,7 @@ module.exports = {
 
       userExists.online = true;
 
-      console.log('user socket', req.connectedUser)
+     // console.log('user socket', req.connectedUser)
      // userExists.idSocket = req.connectedUser
 
       userExists.save();
