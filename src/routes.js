@@ -5,7 +5,7 @@ const DislikeController = require("./controllers/DislikeController");
 const ProductController = require("./controllers/ProductController");
 const NotificationController = require("./controllers/NotificationController");
 const InviteController = require("./controllers/InviteController");
-
+const LogoutController  = require("./controllers/LogoutController");
 const routes = express.Router();
 
 routes.get("/user",DevController.index)
@@ -20,6 +20,7 @@ routes.get("/myproduct/:id",ProductController.myIndex);
 routes.get("/notification/:id",NotificationController.index);
 
 routes.post("/invite",InviteController.store);
+routes.post("/logout", LogoutController.store)
 
 module.exports = routes;
 
