@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require('cors');
+const Dev  = require("../models/dev");
 
 const app = express();
 const server = require('http').Server(app)
@@ -29,30 +30,32 @@ io.on('connection',socket => {
   
       if(error) return callback(error);
       
-     // socket.emit('message', {room: room, message:`${name}, esta te convidando para um chat`} );
       socket.join(user.room);
       socket.emit('message', { user: user.name, text: `${user.name}, entrou no chat.`});
       socket.broadcast.to(user.room).emit('message', { user: user.name , text: `${user.name} esta conectada!` });
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
       callback();
 
-
     });
   
     socket.on('sendMessage', (message, callback) => {
+
       const user = getUser(socket.id);
-  
       io.to(user.room).emit('message', { user: user.name, text: message });
-  
       callback();
+
     });
   
     socket.on('disconnect', () => {
 
       const user = removeUser(socket.id);
+      const userExists = await Dev.findById(socket.handshake.query.user);
 
-      console.log('estou saindo', socket.handshake.query.user)
-  
+      if(userExists){
+        userExists.online = fasle;
+        userExists.save();
+       }
+
       if(user) {
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
         io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
@@ -70,6 +73,7 @@ app.use((req,res,next)=>{
     return next();
 
 })
+
 app.use(cors())
 mongoose.connect('mongodb+srv://wilkor:wilkor@cluster0-kizd7.mongodb.net/omnistak8?retryWrites=true&w=majority',{useNewUrlParser:true})
 app.use(express.json())
