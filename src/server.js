@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require('cors');
-const Dev  = require("../models/dev");
+const Dev  = require("./models/dev");
 
 const app = express();
 const server = require('http').Server(app)
