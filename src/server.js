@@ -52,11 +52,9 @@ io.on('connection',socket => {
       
           Dev.findById(socket.handshake.query.user).then(res => {
 
-          if(res){
-
-            console.log(res)
-            //res.online = fasle;
-           // res.save();
+          if(res) {
+            res.online = falsse;
+            res.save();
           }
 
         });
