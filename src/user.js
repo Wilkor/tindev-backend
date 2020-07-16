@@ -1,4 +1,4 @@
-const Dev  = require("./models/dev");
+
 
 const users = [];
 
@@ -18,19 +18,18 @@ const addUser = ({ id, name, room }) => {
   return { user };
 }
 
-const removeUser = async (id,userId) => {
+const removeUser = async (id) => {
 
-  console.log(userId)
   const index = users.findIndex((user) => user.id === id);
 
   if(index !== -1) return users.splice(index, 1)[0];
 
-  const userExists =  await Dev.findById(userId.user);
+  // const userExists =  await Dev.findById(userId.user);
 
-  if(userExists){
-    userExists.online = false;
-    userExists.save();
-   }
+  // if(userExists){
+  //   userExists.online = false;
+  //   userExists.save();
+  //  }
 
 }
 

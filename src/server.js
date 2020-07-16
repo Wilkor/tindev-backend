@@ -18,12 +18,12 @@ io.on('connection', async (socket) => {
     const {user} = socket.handshake.query;
      connectedUser[user] = socket.id
 
-     const userExists =  await Dev.findById(user);
+    //  const userExists =  await Dev.findById(user);
 
-     if(userExists){
-       userExists.online = true;
-       userExists.save();
-      }
+    //  if(userExists){
+    //    userExists.online = true;
+    //    userExists.save();
+    //   }
      
      socket.on('join', ({ name, room }, callback) => {
 
@@ -49,7 +49,7 @@ io.on('connection', async (socket) => {
   
     socket.on('disconnect', async () => {
 
-      const user = removeUser(socket.id, socket.handshake.query ) 
+      const user = removeUser(socket.id) 
 
       if(user) {
         io.to(user.room).emit('message', { user: user.name, text: `${user.name} saiu do chat.` });
