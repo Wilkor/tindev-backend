@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const cors = require('cors');
-
+const Dev  = require("./models/dev");
 
 const app = express();
 const server = require('http').Server(app)
@@ -13,12 +13,18 @@ const connectedUser = {}
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./user');
 
 
-io.on('connection',socket => {
+io.on('connection', async (socket) => {
 
     const {user} = socket.handshake.query;
      connectedUser[user] = socket.id
 
-    console.log("voltei")
+     const userExists =  await Dev.findById(user);
+
+     if(userExists){
+       userExists.online = false;
+       userExists.save();
+      }
+     
      socket.on('join', ({ name, room }, callback) => {
 
       const { error, user } = addUser({ id: socket.id, name, room });
