@@ -4,18 +4,11 @@ module.exports = {
 
     async index(req,res){
 
-      const {user:LoggedUser} = req.headers
-        const loggedDev = await Dev.findById(LoggedUser);
+        const loggedUser = await Dev.find();
 
-        const user = await Dev.find({
-            $and:[
-                {_id:{$ne:LoggedUser}},
-                {_id:{$nin:loggedDev.likes}},
-                {_id:{$nin:loggedDev.dislikes}}
-        ],
-        })
+        const filterOnline = loggedUser.filter(user => user.online == true)
 
-        return res.json(user)
+        return res.json(filterOnline)
 
     },
 
