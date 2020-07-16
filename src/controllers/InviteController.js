@@ -6,7 +6,7 @@ module.exports = {
     const targetSocket = req.connectedUser[idUser];
 
     console.log('targetSocket', targetSocket)
-    req.io.to(targetSocket).emit('invitation',  {room: room, message:`${name}, esta te convidando para um chat`});
+    req.io.to(targetSocket).emit('invitation',  {room: room, message:`${name}, esta te convidando para um chat. clique aqui e fale com ele agora!`});
     return res.json({ok:'ok'})
    }
 }
