@@ -14,23 +14,23 @@ module.exports = {
 
 
 
-        if (likedProduct.likes.includes(req.headers.user)) {
+        if (!likedProduct.likes.includes(req.headers.user)) {
           
-          if(!userLogged.online === true ){
+          if(!userLogged.online){
   
             await Notification.create({
               name: infoUser.name,
               user: likedProduct.user,
               urlFireBase: infoUser.urlFireBase,
               userLogged: req.headers.user,
-              produtctId: likedProduct.Id
+              produtctId: likedProduct._id
             });
             likedProduct.likes.push(req.headers.user);
             likedProduct.save();
-          } else {
+          } 
 
-             return res.json({message:'Você já curtiu esse produto!'})
-          }
+          return res.json({message:'Você já curtiu esse produto!'});
+
         } else {
           
           req.io.to(targetSocket).emit('like',infoUser);
@@ -40,7 +40,7 @@ module.exports = {
           return res.json({ok:'ok'})
         }
 
-       
+        
      }
  
 
