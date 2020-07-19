@@ -37,8 +37,7 @@ module.exports = {
      const  dev = await Dev.create({
          name:displayName,
          user:uid,
-         urlFireBase:photoURL,
-         online:true 
+         urlFireBase:photoURL
      }).catch(err=>{
 
         console.log(err)
